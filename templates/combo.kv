@@ -1,0 +1,28 @@
+#:import OneUIColors configs.color.OneUIColors
+
+<OneUIComboItem>:
+    orientation: "vertical"
+    padding: [0, 10]
+    md_bg_color: [0, 0, 0, .8]
+    OneUIComboButtonText:
+        text: root.text
+        halign: "left"
+        valign: "center"
+
+<OneUIComboButton>:
+    cols: 2
+    md_bg_color: [ 1, 1, 1, 1 ]
+    combo_field: combo_field
+    OneUITextField:
+        id: combo_field
+        background_color: [ 1, 1, 1, 1 ]
+        foreground_color: [ 0, 0, 0, 0]
+        readonly: True
+        border_color: [1, 1, 1, 1]
+        hint_text: "Select Option"
+    MDIconButton:
+        theme_text_color: "Custom"
+        text_color: 0, 0, 0, 0.5
+        icon: "arrow-up-down-bold-outline"
+        on_release: root.open()
+

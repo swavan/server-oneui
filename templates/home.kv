@@ -1,0 +1,58 @@
+#:import NavigationLayout kivymd.uix.navigationdrawer.NavigationLayout
+#:import MDNavigationDrawer kivymd.uix.navigationdrawer.MDNavigationDrawer
+
+#:import NoTransition kivy.uix.screenmanager.NoTransition
+
+#:import OneUIMockPage features.mock.page.OneUIMockPage
+#:import OneUIBrowserRulePage features.browser_rule.page.OneUIBrowserRulePage
+#:import OneUIHelpPage features.help.page.OneUIHelpPage
+#:import OneUIAboutPage features.about.page.OneUIAboutPage
+#:import OneUIHomePage features.home.page.OneUIHomePage
+<OneUIHomePage>:
+    MDBoxLayout:
+        orientation: "vertical"
+        MDToolbar:
+            title: "Home"
+            left_action_items: [["menu", lambda x: root.nav_drawer.set_state("toggle")]]
+        MDLabel:
+            halign: "center"
+            text: "Home page content"
+
+
+<OneUIPageManager>:
+    menuItems: menuItems
+    main_screen_manager: main_screen_manager
+    NavigationLayout:
+        ScreenManager:
+            id: main_screen_manager
+            transition: NoTransition()
+
+            OneUIHomePage:
+                name: "home"
+                nav_drawer: nav_drawer
+
+            OneUIMockPage:
+                name: "mock"
+                nav_drawer: nav_drawer
+
+            OneUIBrowserRulePage:
+                name: "browser_rule"
+
+            OneUIHelpPage:
+                name: "help"
+
+            OneUIAboutPage:
+                name: "about"
+
+        MDNavigationDrawer:
+            type: "standard"
+            id: nav_drawer
+            state: "open"
+            elevation: 0
+            size_hint_x: None
+
+            MDBoxLayout:
+                orientation: "vertical"
+                ScrollView:
+                    MDList:
+                        id: menuItems

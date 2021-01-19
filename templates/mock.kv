@@ -1,0 +1,324 @@
+#:import OneUIColors configs.color.OneUIColors
+
+#:import OneUIMockView features.mock.view.OneUIMockView
+#:import OneUIMockAdd features.mock.add.OneUIMockAdd
+
+#:import STATUS_CODES configs.codes.STATUS_CODES
+#:import CONTENT_TYPES configs.codes.CONTENT_TYPES
+#:import FILTER_BY_OPTIONS configs.codes.FILTER_BY_OPTIONS
+#:import OPERATORS configs.codes.OPERATORS
+#:import HTTP_METHODS configs.codes.HTTP_METHODS
+
+#:import OneUITextField widgets.text.OneUITextField
+#:import OneUIButton widgets.button.OneUIButton
+#:import OneUIComboDropdown widgets.combo.OneUIComboDropdown
+#:import NumberInputField widgets.text.NumberInputField
+
+<OneUIMockPage>:
+    MDGridLayout:
+        cols: 1
+        rows: 2
+        md_bg_color: rgba("#B7B7B7")
+        MDToolbar:
+            md_bg_color: app.theme_cls.primary_color
+            title: "Mock"
+            right_action_items: [ ["plus-box", lambda x: root.switch("mock_add")], ["view-list", lambda x: root.switch("mock_view")], ["menu-right-outline", lambda x: root.nav_drawer.set_state("toggle")]]
+        ScreenManager:
+            id: mock_screen_manager
+            MDScreen:
+                name: "mock_view"
+                OneUIMockView:
+            OneUIMockAdd:
+                name: "mock_add"
+
+<OneUIMockAdd>:
+    responses: responses
+    ScrollView:
+        do_scroll_x: False
+        do_scroll_y: True
+        MDBoxLayout:
+            adaptive_height: True
+            orientation: "vertical"
+            padding: 25
+            spacing: 20
+            OneUIBox:
+                orientation: "vertical"
+                spacing: 20
+                adaptive_height: True
+                OneUITextField:
+                    id: given_name
+                    hint_text: "Endpoint Identifier"
+                    multiline: False
+                    write_tab: False
+
+                OneUITextArea:
+                    id: mock_description
+                    hint_text: "Description"
+                    height: 200
+                    write_tab: False
+
+            # Add response tab here
+            MDList:
+                cols: 1
+                id: responses
+                spacing: 10
+                adaptive_height: True
+
+            MDRectangleFlatIconButton:
+                theme_text_color: "Custom"
+                icon: "plus-box-multiple-outline"
+                text: "Add More"
+                size_hint_x: None
+                width: 230
+                on_release: root.add_response()
+
+            OneUIButton:
+                size_hint: None, None
+                width:200
+                height: 80
+                text: "Save"
+                back_color: OneUIColors.SaveButton.value
+                on_release: root.save()
+
+# Mock Rules
+<OneUIAddMockResponseRules>:
+    orientation: "vertical"
+    adaptive_height: True
+    spacing: 10
+    padding: 30
+    md_bg_color: rgba("#312c51")
+    OneUIBox:
+        orientation: "vertical"
+        spacing: 15
+        adaptive_height: True
+        id: mock_rules
+    OneUIBox:
+        size_hint: None, None
+        width: 260
+        height: 80
+        OneUIButton:
+            markup: True
+            text: "[b] Add more rules [/b]"
+            back_color: OneUIColors.SaveButton.value
+            font_size: "14sp"
+            border_radius: [ 10 ]
+            on_release: root.add()
+
+# Mock response rules
+<OneUIAddMockResponseRule>:
+    cols: 5
+    spacing: 2
+    adaptive_height: True
+    OneUIComboDropdown:
+        id: mock_fil ter_type
+        size_hint: None, None
+        height: 100
+        width: 300
+        items: FILTER_BY_OPTIONS.keys()
+    OneUITextField:
+        id: mock_filter_key
+        hint_text: "Key"
+        multiline: False
+    OneUIComboDropdown:
+        id: mock_filter_operator
+        size_hint: None, None
+        height: 100
+        width: 300
+        items: OPERATORS.keys()
+    OneUITextField:
+        id: mock_filter_value
+        hint_text: "Value"
+        multiline: False
+    OneUIBox:
+        size_hint: None, None
+        width: 100
+        height: 100
+        OneUIButton:
+            markup: True
+            text: "[b]+[/b]"
+            back_color: [1, 0, 0, 0.5]
+            font_size: "36sp"
+            border_radius: [ 0, 0 ]
+            on_release: root.on_delete()
+            canvas.before:
+                PushMatrix
+                Rotate:
+                    angle: 45
+                    origin: self.center
+            canvas.after:
+                PopMatrix
+
+# Mock response headers
+<OneUIMOckResponseHeaders>
+    spacing: 20
+    orientation: "vertical"
+    adaptive_height: True
+    md_bg_color: rgba("#312c51")
+    padding: [20]
+    OneUIBox:
+        orientation: "vertical"
+        spacing: 20
+        adaptive_height: True
+        id: headers
+    OneUIBox:
+        size_hint: None, None
+        width: 260
+        height: 80
+        OneUIButton:
+            markup: True
+            text: "[b] Add more header [/b]"
+            back_color: [0, 0, 0, 0 ]
+            font_size: "14sp"
+            border_radius: [ 10 ]
+            on_release: root.add()
+
+# Mock response status, content-type and body
+<OneUIMOckResponseData>
+    cols: 1
+    spacing: 20
+    adaptive_height: True
+    padding: 30
+    md_bg_color: [1, 1, 1, .7]
+    OneUIGrid:
+        cols: 3
+        spacing: 20
+        adaptive_height: True
+        OneUIComboDropdown:
+            id: http_method
+            helper_text: 'Http Method'
+            size_hint_x: None
+            width: "160dp"
+            items: HTTP_METHODS.keys()
+
+        OneUITextField:
+            id: mock_data_point
+            hint_text: "Path ( regex, query or leave it empty to auto generate )"
+
+        NumberInputField:
+            id: response_delay
+            hint_text: "Delay"
+            size_hint_x: None
+            width: "100dp"
+            start: 0
+            end: 60
+            halign: 'center'
+
+
+    OneUIGrid:
+        cols: 2
+        adaptive_height: True
+        spacing: 20
+        OneUIComboDropdown:
+            id: mock_http_content_type
+            size_hint_y: None
+            height: 100
+            items: CONTENT_TYPES
+        OneUIComboDropdown:
+            id: mock_http_status_code
+            helper_text: 'Http Method'
+            size_hint_y: None
+            height: 100
+            items: STATUS_CODES.keys()
+    OneUIBox:
+        adaptive_height: True
+        orientation: "vertical"
+        OneUITextField:
+            id: mock_data
+            hint_text: "Data"
+            multiline: True
+            size_hint_y: None
+            height: "300dp"
+    OneUIGrid:
+        cols: 2
+        adaptive_height: True
+        OneUITextField:
+            id: mock_data_file
+            hint_text: "Path of the data file i.e. /user/data/email.json"
+            multiline: False
+        OneUIBox:
+            orientation: "vertical"
+            padding: 3
+            size_hint: ( None, 1 )
+            width: 100
+            md_bg_color: OneUIColors.Background.value
+            MDIconButton:
+                icon: "file-search"
+                theme_text_color: "Custom"
+                text_color: [1, 1, 1, 1]
+
+# Response section header buttons
+<OneUIMockResponseHeaderPanel>:
+    adaptive_height: True
+    padding: [ 1, 1, 1, 1 ]
+    OneUILeftSide:
+        OneUIHorizontalList:
+            md_bg_color: [0, 0, 0, 0]
+            cols: 3
+            rows: 1
+            spacing: 1
+            height: 100
+            size_hint: (None, None)
+            width: 450
+            border_radius:[ 0 ]
+            adaptive_height: True
+            OneUIButton:
+                back_color: [ 0, 0, 0, 0.2]
+                text: "Data"
+                font_size: "15sp"
+                width: 150
+                height: 100
+                border_radius:[ 0 ]
+                on_release: root.load_data_page()
+            OneUIButton:
+                back_color: [ 0, 0, 0, 0.2 ]
+                text: "Headers"
+                font_size: "15sp"
+                width: 150
+                height: 100
+                border_radius:[ 0 ]
+                on_release: root.load_headers_page()
+            OneUIButton:
+                back_color: [ 0, 0, 0, 0.2 ]
+                text: "Rules"
+                font_size: "15sp"
+                width: 150
+                height: 100
+                border_radius:[ 0 ]
+                on_release: root.load_rules_page()
+    OneUIRightSide:
+        md_bg_color: [1, 1, 1, 1]
+        MDIconButton:
+            icon: "trash-can"
+            theme_text_color: "Custom"
+            on_release: root.remove()
+            text_color: [1, 0, 0, .8]
+
+<OneUIMockHeader>:
+    adaptive_height: True
+    spacing: 1
+    cols: 3
+    rows: 1
+    OneUITextField:
+        id: header_key_field
+        hint_text: "Header Key"
+        multiline: False
+    OneUITextField:
+        id: header_value_field
+        hint_text: "Value"
+        multiline: False
+    OneUIStrokeButton:
+        size_hint_x: None
+        width: 100
+        markup: True
+        text: "[b]+[/b]"
+        back_color: OneUIColors.TextField.value
+        font_size: "36sp"
+        border_radius: [ 0, 0 ]
+        on_release: root.on_delete()
+        canvas.before:
+            PushMatrix
+            Rotate:
+                angle: 45
+                origin: self.center
+        canvas.after:
+            PopMatrix

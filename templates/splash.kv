@@ -1,0 +1,21 @@
+
+<OneUISplashPage>
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: "10dp"
+        Widget:
+        MDLabel:
+            text: "SwaVan"
+            valign: "center"
+            halign: "center"
+            size_hint_y: None
+            height: 50
+            font_size: "30dp"
+        MDProgressBar:
+            value: root.progress_val
+            pos_hint: {"center_y": .6}
+            size_hint_y: None
+            height: 50
+            type: "indeterminate"
+        Widget:
+

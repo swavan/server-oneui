@@ -1,0 +1,49 @@
+# :import OneUIBaseButton views.decorated.button.OneUIBaseButton
+
+<OneUIButton>:
+    back_color: 1, 0, 1, 1
+    border_radius:  [ 10 ]
+    canvas.before:
+        Color:
+            rgba: self.back_color
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: self.border_radius
+
+<OneUIStrokeButton>:
+    back_color: 1, 0, 1, 1
+    border_radius: 10
+    bold: True
+    color: self.back_color
+    background_color: 0, 0, 0, 0
+    canvas.before:
+        Color:
+            rgba: self.back_color
+        Line:
+            rounded_rectangle: (self.pos[0], self.pos[1], self.size[0], self.size[1], self.border_radius)
+            width: 1
+
+<OneUIToggleButton>:
+    back_color: 1, 0, 1, 1
+    border_radius:  [ 10 ]
+    canvas.before:
+        Color:
+            rgba: self.back_color
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: self.border_radius
+
+<OneUIStrokeToggleButton>:
+    back_color: 1, 0, 1, 1
+    border_radius: 10
+    bold: True
+    color: self.back_color
+    background_color: 0, 0, 0, 0
+    canvas.before:
+        Color:
+            rgba: self.back_color
+        Line:
+            rounded_rectangle: (self.pos[0], self.pos[1], self.size[0], self.size[1], self.border_radius)
+            width: 1
