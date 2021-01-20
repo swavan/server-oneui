@@ -33,6 +33,8 @@
 
 <OneUIMockAdd>:
     responses: responses
+    endpoint_identifier: endpoint_identifier
+    endpoint_description: endpoint_description
     ScrollView:
         do_scroll_x: False
         do_scroll_y: True
@@ -46,13 +48,13 @@
                 spacing: 20
                 adaptive_height: True
                 OneUITextField:
-                    id: given_name
+                    id: endpoint_identifier
                     hint_text: "Endpoint Identifier"
                     size_hint: 1, None
                     height: "50dp"
 
                 OneUITextArea:
-                    id: mock_description
+                    id: endpoint_description
                     hint_text: "Description"
                     size_hint: 1, None
                     height: "150dp"
@@ -111,8 +113,13 @@
     cols: 5
     adaptive_height: True
     md_bg_color: app.theme_cls.primary_color
+    mock_filter_by: mock_filter_by
+    mock_filter_key: mock_filter_key
+    mock_filter_operator: mock_filter_operator
+    mock_filter_value: mock_filter_value
+
     OneUIComboDropdown:
-        id: mock_fil ter_type
+        id: mock_filter_by
         size_hint: None, 1
         width: dp(150)
         placeholder: "Filter By"
@@ -171,25 +178,32 @@
     adaptive_height: True
     padding: 30
     md_bg_color: [1, 1, 1, .7]
+    mock_http_method: mock_http_method
+    mock_url: mock_url
+    mock_response_delay: mock_response_delay
+    mock_content_type: mock_content_type
+    mock_status_code: mock_status_code
+    mock_file_url: mock_file_url
+    mock_data: mock_data
     OneUIGrid:
         cols: 3
-        spacing: dp(20)
+        spacing: dp(5)
         adaptive_height: True
         OneUIComboDropdown:
-            id: http_method
+            id: mock_http_method
             placeholder: 'Http Method'
             size_hint_x: None
             width: "160dp"
             items: HTTP_METHODS.keys()
 
         OneUITextField:
-            id: mock_data_point
+            id: mock_url
             hint_text: "Path ( regex, query or leave it empty to auto generate )"
             size_hint: 1, None
             height: "50dp"
 
         NumberInputField:
-            id: response_delay
+            id: mock_response_delay
             hint_text: "Delay"
             size_hint_x: None
             width: "100dp"
@@ -197,17 +211,16 @@
             end: 60
             halign: 'center'
 
-
     OneUIGrid:
         cols: 2
         adaptive_height: True
         spacing: "20dp"
         OneUIComboDropdown:
-            id: mock_http_content_type
+            id: mock_content_type
             items: CONTENT_TYPES
             placeholder: "Content Type"
         OneUIComboDropdown:
-            id: mock_http_status_code
+            id: mock_status_code
             helper_text: 'Http Method'
             items: STATUS_CODES.keys()
             placeholder: "Status Codes"
@@ -220,7 +233,7 @@
         row_force_default: True
 
         OneUITextField:
-            id: mock_data_file
+            id: mock_file_url
             hint_text: "Path of the data file i.e. /user/data/email.json"
             size_hint: 1, None
             height: dp(50)
@@ -296,6 +309,8 @@
     cols: 3
     rows: 1
     md_bg_color: app.theme_cls.primary_color
+    header_key_field: header_key_field
+    header_value_field: header_value_field
     OneUITextField:
         id: header_key_field
         hint_text: "Header Key"

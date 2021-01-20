@@ -56,6 +56,15 @@ class OneUIComboButton(ButtonBehavior, MDGridLayout):
         self.combo_field.text = data
 
     @property
+    def text(self) -> str:
+        return self.combo_field.text if self.combo_field else ""
+
+    @text.setter
+    def text(self, val) -> None:
+        if self.combo_field:
+            self.combo_field.text = val
+
+    @property
     def menu(self) -> OneUICombo:
         return self.__menu
 

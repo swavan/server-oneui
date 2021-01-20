@@ -1,6 +1,5 @@
 from kivy.properties import ObjectProperty
 from kivymd.uix.boxlayout import MDBoxLayout
-from kivymd.uix.card import MDCard
 from kivymd.uix.gridlayout import MDGridLayout
 from kivymd.uix.screen import MDScreen
 
@@ -10,10 +9,38 @@ from widgets.toolbar import OneUITopBar
 
 
 class OneUIMockAdd(MDScreen):
+    endpoint_identifier = ObjectProperty()
+    endpoint_description = ObjectProperty()
+
     responses = ObjectProperty()
 
     def save(self):
-        print("Saving Mock")
+        print(f"Name: {self.endpoint_identifier.text}")
+        print(f"Description: {self.endpoint_description.text}")
+        # print("Responses: ", self.responses.children[0].bodies)
+        for _response in self.responses.children:
+            response, head, rule = _response.bodies
+            print(f"Http Method: {response.mock_http_method.text}")
+            print(f"URL: {response.mock_url.text}")
+            print(f"Delay: {response.mock_response_delay.text}")
+            print(f"Content-Type: {response.mock_content_type.text}")
+            print(f"Status Code: {response.mock_status_code.text}")
+            print(f"File Path: {response.mock_file_url.text}")
+            print(f"Raw Data: {response.mock_data.text}")
+
+            print("---------------Headers--------------")
+            _, headers = head.children
+            for header in headers.children:
+                print(f"Header Key: {header.header_key_field.text}\tValue: {header.header_value_field.text}")
+
+            print("---------------Rules--------------")
+            print(rule.children)
+            _, filters = rule.children
+            for f in filters.children:
+                print(f"By: {f.mock_filter_by.text}")
+                print(f"\tKey: {f.mock_filter_key.text}")
+                print(f"\t\tOperator: {f.mock_filter_operator.text}")
+                print(f"\t\t\tValue: {f.mock_filter_value.text}")
 
     def add_response(self):
         body_container = OneUIExpandablePanel()
@@ -38,10 +65,6 @@ class OneUIMockAdd(MDScreen):
         self.responses.remove_widget(widget)
 
 
-class OneUIAddMockButtons(OneUIGrid):
-    pass
-
-
 class OneUIAddMockResponseRules(MDBoxLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -57,6 +80,11 @@ class OneUIAddMockResponseRules(MDBoxLayout):
 
 
 class OneUIAddMockResponseRule(MDGridLayout):
+    mock_filter_by = ObjectProperty()
+    mock_filter_key = ObjectProperty()
+    mock_filter_operator = ObjectProperty()
+    mock_filter_value = ObjectProperty()
+
     def on_delete(self):
         pass
 
@@ -78,11 +106,16 @@ class OneUIMOckResponseHeaders(MDBoxLayout):
 
 
 class OneUIMOckResponseData(OneUIGrid):
-    pass
+    mock_http_method = ObjectProperty()
+    mock_url = ObjectProperty()
+    mock_response_delay = ObjectProperty()
+    mock_content_type = ObjectProperty()
+    mock_status_code = ObjectProperty()
+    mock_file_url = ObjectProperty()
+    mock_data = ObjectProperty()
 
 
 class OneUIMockResponseHeaderPanel(OneUITopBar):
-
     def load_headers_page(self):
         pass
 
@@ -100,5 +133,8 @@ class OneUIMockResponseHeaderPanel(OneUITopBar):
 
 
 class OneUIMockHeader(MDGridLayout):
+    header_key_field = ObjectProperty()
+    header_value_field = ObjectProperty()
+
     def on_delete(self):
         pass

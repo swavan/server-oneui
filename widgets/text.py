@@ -13,14 +13,6 @@ class OneUITextRaw(TextInput):
         self.border = [10, 10, 10, 10]
         self.padding = ['12dp', '16dp', '12dp', '12dp']
 
-    # def _on_focus(self, instance, value, *kwargs):
-    #     if value and self.pressed:
-    #         try:
-    #             self.pressed()
-    #         except:
-    #             raise ValueError('pressed is not function')
-    #     return super()._on_focus(instance, value, *kwargs)
-
 
 class OneUITextField(OneUITextRaw):
     border_color = ListProperty([1, 1, 1, 1])
@@ -34,7 +26,7 @@ class OneUITextField(OneUITextRaw):
         self.hint_text_color = [0, 0, 0, 0.5]
         self.cursor_color = [0, 0, 0, 0.8]
         self.foreground_color = [0, 0, 0, 1]
-        self.selection_color = 0.925, 0.941, 0.937, 0.5
+        self.selection_color = [0, 1, 0, 1]
 
         self.padding = ['12dp', '16dp']
         self.halign = 'left'

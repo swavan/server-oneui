@@ -21,9 +21,13 @@ class OneUI(MDScreen):
 
 
 class SwaVanServerApp(MDApp):
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        print(self.get_application_name())
+
     def build(self):
         self.title = "SwaVan Server"
-
         self.theme_cls.primary_palette = "BlueGray"
         self.theme_cls.primary_hue = "900"
 
