@@ -13,16 +13,21 @@
     cols: 2
     md_bg_color: [ 1, 1, 1, 1 ]
     combo_field: combo_field
+    size_hint: 1, None
+    row_default_height: dp(50)
     OneUITextField:
         id: combo_field
         background_color: [ 1, 1, 1, 1 ]
         foreground_color: [ 0, 0, 0, 0]
         readonly: True
         border_color: [1, 1, 1, 1]
-        hint_text: "Select Option"
+        hint_text: root.placeholder
+        size_hint_y: None
+        height: root.height
     MDIconButton:
         theme_text_color: "Custom"
         text_color: 0, 0, 0, 0.5
-        icon: "arrow-up-down-bold-outline"
+        icon: "assets/images/text/up-down-arrows.png"
         on_release: root.open()
-
+        size_hint_y: None
+        height: root.height

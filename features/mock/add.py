@@ -62,6 +62,7 @@ class OneUIAddMockResponseRule(MDGridLayout):
 
 
 class OneUIMOckResponseHeaders(MDBoxLayout):
+    headers = ObjectProperty()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -70,10 +71,10 @@ class OneUIMOckResponseHeaders(MDBoxLayout):
     def add(self):
         fields = OneUIMockHeader()
         fields.on_delete = lambda: self.remove(fields)
-        self.ids.headers.add_widget(fields)
+        self.headers.add_widget(fields)
 
     def remove(self, widget):
-        self.ids.headers.remove_widget(widget)
+        self.headers.remove_widget(widget)
 
 
 class OneUIMOckResponseData(OneUIGrid):

@@ -63,6 +63,8 @@ class NumberInputField(OneUITextRaw):
         self.cursor_color = [0, 0, 0, 0.8]
         self.foreground_color = [0, 0, 0, 1]
         self.selection_color = 0.925, 0.941, 0.937, 0.5
+        self.size_hint_y = None
+        self.height = dp(50)
 
     def insert_text(self, port: str, from_undo=False):
         try:

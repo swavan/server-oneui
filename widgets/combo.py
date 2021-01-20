@@ -36,12 +36,13 @@ class OneUICombo(DropDown):
             btn = OneUIComboItem()
             btn.text = _item.title()
             btn.size_hint_y = None
-            btn.height = 100
+            btn.height = dp(60)
             btn.bind(on_release=lambda x: self.select(x.text))
             self.add_widget(btn)
 
 
 class OneUIComboButton(ButtonBehavior, MDGridLayout):
+    placeholder = StringProperty()
     combo_field = ObjectProperty()
     __menu = OneUICombo()
 
