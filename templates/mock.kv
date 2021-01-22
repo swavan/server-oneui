@@ -13,6 +13,7 @@
 #:import OneUIButton widgets.button.OneUIButton
 #:import OneUIComboDropdown widgets.combo.OneUIComboDropdown
 #:import NumberInputField widgets.text.NumberInputField
+#:import OneUIFileBar widgets.file_bar.OneUIFileBar
 
 <OneUIMockPage>:
     MDGridLayout:
@@ -111,40 +112,51 @@
 # Mock response rules
 <OneUIAddMockResponseRule>:
     cols: 5
-    adaptive_height: True
-    md_bg_color: app.theme_cls.primary_color
     mock_filter_by: mock_filter_by
     mock_filter_key: mock_filter_key
     mock_filter_operator: mock_filter_operator
     mock_filter_value: mock_filter_value
-
+    size_hint: 1, None
+    height: "50dp"
+    spacing: dp(1)
     OneUIComboDropdown:
         id: mock_filter_by
-        size_hint: None, 1
-        width: dp(150)
+        size_hint: None, None
+        width: dp(200)
+        height: "50dp"
         placeholder: "Filter By"
         items: FILTER_BY_OPTIONS.keys()
 
     OneUITextField:
         id: mock_filter_key
         hint_text: "Key"
+        size_hint: 1, None
+        height: "50dp"
 
     OneUIComboDropdown:
         id: mock_filter_operator
-        size_hint: 1, None
-        width: dp(150)
         items: OPERATORS.keys()
         placeholder: "Condition"
+        size_hint: None, None
+        height: "50dp"
+        width: dp(150)
 
     OneUITextField:
         id: mock_filter_value
         hint_text: "Value"
+        size_hint: 1, None
+        height: "50dp"
 
-    MDIconButton:
-        theme_text_color: "Custom"
-        on_release: root.on_delete()
-        icon: "trash-can"
-        text_color: [1, 1, 1, .8]
+    OneUIBox:
+        size_hint: None, None
+        height: "50dp"
+        width: dp(50)
+        md_bg_color: app.theme_cls.primary_color
+        MDIconButton:
+            theme_text_color: "Custom"
+            on_release: root.on_delete()
+            icon: "trash-can"
+            text_color: [1, 1, 1, .8]
 
 
 
@@ -209,7 +221,7 @@
             width: "100dp"
             start: 0
             end: 60
-            halign: 'center'
+
 
     OneUIGrid:
         cols: 2
@@ -224,32 +236,11 @@
             helper_text: 'Http Method'
             items: STATUS_CODES.keys()
             placeholder: "Status Codes"
-
-    OneUIGrid:
-        cols: 2
+    OneUIBox:
         adaptive_height: True
-        size_hint: 1, None
-        row_default_height: dp(50)
-        row_force_default: True
-
-        OneUITextField:
+        OneUIFileBar:
             id: mock_file_url
-            hint_text: "Path of the data file i.e. /user/data/email.json"
-            size_hint: 1, None
-            height: dp(50)
 
-        OneUIBox:
-            orientation: "vertical"
-            padding: 3
-            size_hint: ( None, 1 )
-            width: dp(100)
-            md_bg_color: OneUIColors.Background.value
-            size_hint: None, None
-            size: dp(50), dp(50)
-            MDIconButton:
-                icon: "file-search"
-                theme_text_color: "Custom"
-                text_color: [1, 1, 1, 1]
     OneUIBox:
         adaptive_height: True
         orientation: "vertical"
@@ -308,18 +299,26 @@
     spacing: dp(1)
     cols: 3
     rows: 1
-    md_bg_color: app.theme_cls.primary_color
     header_key_field: header_key_field
     header_value_field: header_value_field
     OneUITextField:
         id: header_key_field
         hint_text: "Header Key"
+        size_hint: 1, None
+        height: "50dp"
     OneUITextField:
         id: header_value_field
         hint_text: "Header Value"
-    MDIconButton:
-        icon: "trash-can"
-        theme_text_color: "Custom"
-        text_color: [1, 1, 1, .8]
-        on_release: root.on_delete()
+        size_hint: 1, None
+        height: "50dp"
+    OneUIBox:
+        size_hint: None, None
+        height: "50dp"
+        width: dp(50)
+        md_bg_color: app.theme_cls.primary_color
+        MDIconButton:
+            icon: "trash-can"
+            theme_text_color: "Custom"
+            text_color: [1, 1, 1, .8]
+            on_release: root.on_delete()
 

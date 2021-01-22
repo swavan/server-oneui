@@ -3,9 +3,13 @@ from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.gridlayout import MDGridLayout
 from kivymd.uix.screen import MDScreen
 
+from configs.codes import HTTP_METHODS
+from widgets.combo import OneUICombo
 from widgets.layout import OneUIGrid
 from widgets.panel import OneUIExpandablePanel
 from widgets.toolbar import OneUITopBar
+
+from features.mock.controller import save_endpoint_identifier
 
 
 class OneUIMockAdd(MDScreen):
@@ -18,6 +22,8 @@ class OneUIMockAdd(MDScreen):
         print(f"Name: {self.endpoint_identifier.text}")
         print(f"Description: {self.endpoint_description.text}")
         # print("Responses: ", self.responses.children[0].bodies)
+        endpoint_identifier = save_endpoint_identifier(self.endpoint_identifier.text, self.endpoint_description.text)
+
         for _response in self.responses.children:
             response, head, rule = _response.bodies
             print(f"Http Method: {response.mock_http_method.text}")
@@ -106,6 +112,7 @@ class OneUIMOckResponseHeaders(MDBoxLayout):
 
 
 class OneUIMOckResponseData(OneUIGrid):
+    http_method = OneUICombo()
     mock_http_method = ObjectProperty()
     mock_url = ObjectProperty()
     mock_response_delay = ObjectProperty()
@@ -113,6 +120,14 @@ class OneUIMOckResponseData(OneUIGrid):
     mock_status_code = ObjectProperty()
     mock_file_url = ObjectProperty()
     mock_data = ObjectProperty()
+    
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        print(self.ids)
+        self.http_method.size_hint_max_y = None
+        self.http_method.max_height = 300
+        self.http_method.items = HTTP_METHODS.keys()
+        self.http_method.on_select = lambda x: self.mock_http_update(x)
 
 
 class OneUIMockResponseHeaderPanel(OneUITopBar):

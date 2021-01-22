@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "485ce16469c7888302365a2ae4029482676774226833771aa8adc38fab920548"
+            "sha256": "7344e30e1f73222aae14056a3f1f756b3b5a6d084ea8b184fbb7077ccb86936c"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -93,12 +93,19 @@
             "version": "==0.1.4"
         },
         "kivymd": {
+            "file": "https://github.com/kivymd/KivyMD/archive/master.zip",
             "hashes": [
-                "sha256:9dcbc2cb8affde9c82572198fddb32c814cdd57254a0e4b00c53882db2c8d6a6",
-                "sha256:a9d3e14950ae616bf13f0a9ebccc761ec84e2ba36e671d0102045eaa63dbc2b0"
+                "sha256:42029b2606852e61848149664b0c51aa56d9e0ec336719d9f9fc08856d0245e4"
+            ],
+            "version": "==0.104.2.dev0"
+        },
+        "kivymd-extensions.filemanager": {
+            "hashes": [
+                "sha256:65115d8f3b805ef117d9e6a8cb53317af6618dfb3b41562fd82856c15adffd27",
+                "sha256:9cc8bb5bfc667d3013d3580195310a42633ec6ce1d1ae2c6e4fe9fffc61b0127"
             ],
             "index": "pypi",
-            "version": "==0.104.1"
+            "version": "==0.1.5"
         },
         "outcome": {
             "hashes": [
@@ -145,6 +152,13 @@
             ],
             "markers": "python_version >= '3.6'",
             "version": "==8.1.0"
+        },
+        "pony": {
+            "hashes": [
+                "sha256:2f01e84e79ea7a14040225cb6c079bb266e7ba147346356c266490b18c77ce82"
+            ],
+            "index": "pypi",
+            "version": "==0.7.14"
         },
         "pygments": {
             "hashes": [

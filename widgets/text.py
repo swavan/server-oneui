@@ -26,7 +26,7 @@ class OneUITextField(OneUITextRaw):
         self.hint_text_color = [0, 0, 0, 0.5]
         self.cursor_color = [0, 0, 0, 0.8]
         self.foreground_color = [0, 0, 0, 1]
-        self.selection_color = [0, 1, 0, 1]
+        self.selection_color = [0, 0, 1, .3]
 
         self.padding = ['12dp', '16dp']
         self.halign = 'left'
@@ -62,7 +62,7 @@ class NumberInputField(OneUITextRaw):
         try:
             _value = self.text + port
             _port_number = int(_value)
-            if self.start <= _port_number <= self.end:
+            if self.end != 0 and self.start <= _port_number <= self.end:
                 return super(NumberInputField, self).insert_text(port, from_undo=from_undo)
         except ValueError as _:
             pass

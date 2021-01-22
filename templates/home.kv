@@ -1,4 +1,4 @@
-#:import NavigationLayout kivymd.uix.navigationdrawer.NavigationLayout
+#:import MDNavigationLayout kivymd.uix.navigationdrawer.MDNavigationLayout
 #:import MDNavigationDrawer kivymd.uix.navigationdrawer.MDNavigationDrawer
 
 #:import NoTransition kivy.uix.screenmanager.NoTransition
@@ -22,7 +22,7 @@
 <OneUIPageManager>:
     menuItems: menuItems
     main_screen_manager: main_screen_manager
-    NavigationLayout:
+    MDNavigationLayout:
         ScreenManager:
             id: main_screen_manager
             transition: NoTransition()
