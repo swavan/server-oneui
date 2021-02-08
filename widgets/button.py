@@ -1,6 +1,10 @@
+from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.button import Button
 from kivy.properties import ListProperty, NumericProperty
-from kivy.uix.behaviors.touchripple import TouchRippleButtonBehavior
+from kivy.uix.behaviors.touchripple import TouchRippleButtonBehavior, TouchRippleBehavior
+from kivymd.uix.button import MDIconButton
+from kivymd.uix.label import MDIcon
+from kivymd.uix.tooltip import MDTooltip
 
 
 class OneUIRippleButton(TouchRippleButtonBehavior, Button):
@@ -31,3 +35,11 @@ class OneUIToggleButton(OneUIBaseButton):
 
 class OneUIStrokeToggleButton(OneUIBaseButton):
     border_radius = NumericProperty(10)
+
+
+class OneUITooltipIconButton(MDIconButton, MDTooltip):
+    pass
+
+
+class OneUIIconButton(ButtonBehavior, MDIcon):
+    pass

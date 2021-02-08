@@ -1,7 +1,4 @@
 STATUS_CODES = {
-    "100: Continue": 100,
-    "101: Switching protocols": 101,
-    "103: Early hints": 103,
     "200: Everything is OK.": 200,
     "201: Created": 201,
     "202: Accepted": 202,

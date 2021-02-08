@@ -2,28 +2,32 @@
     cols: 2
     adaptive_height: True
     size_hint: 1, None
-    row_default_height: dp(50)
+    row_default_height: dp(40)
     row_force_default: True
     file_url: file_url
+
     OneUITextField:
         id: file_url
         hint_text: "Path of the data file i.e. /user/data/email.json"
         size_hint_y: None
-        height: dp(50)
+        height: dp(40)
 
-    OneUIBox:
-        orientation: "vertical"
-        padding: 3
-        size_hint: ( None, 1 )
-        width: dp(100)
-        md_bg_color: OneUIColors.Background.value
-        size_hint: None, None
-        size: dp(50), dp(50)
-        MDIconButton:
-            icon: "file-search"
-            theme_text_color: "Custom"
-            text_color: [1, 1, 1, 1]
-            on_release: root.open_popup()
+    OneUIFileOptionAction:
+        on_release: root.open_popup()
+
+
+
+
+<OneUIFileOptionAction>:
+    orientation: "vertical"
+    size_hint: None, None
+    width: dp(40)
+    height: dp(40)
+    MDIcon:
+        icon: "file-search"
+        theme_text_color: "Custom"
+        text_color: OneUIColors.AccentColor.value
+
 
 
 <OneUIFileChoosePopup>:

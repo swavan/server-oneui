@@ -8,9 +8,8 @@ from kivy.properties import StringProperty, ListProperty, ObjectProperty
 from kivy.uix.label import Label
 from kivymd.uix.boxlayout import MDBoxLayout
 
-from kivymd.uix.gridlayout import MDGridLayout
-
 from configs.color import OneUIColors
+from widgets.text import OneUITextFieldWrapper
 
 
 class OneUIComboButtonText(Label):
@@ -52,7 +51,7 @@ class OneUICombo(DropDown):
             self.add_widget(btn)
 
 
-class OneUIComboButton(MDGridLayout):
+class OneUIComboButton(OneUITextFieldWrapper, ButtonBehavior):
     placeholder = StringProperty()
     combo_field = ObjectProperty()
     combo_button = ObjectProperty()
@@ -61,14 +60,10 @@ class OneUIComboButton(MDGridLayout):
 
     def __init__(self, **kwargs):
         super(OneUIComboButton, self).__init__(**kwargs)
-        self.__menu = OneUICombo()
-        self.__menu.size_hint_max_y = None
-        self.__menu.max_height = 300
-        self.__menu.on_select = lambda x: self.selected(x)
+        self.cols = 2
 
     def selected(self, data):
         self.combo_field.text = data
-        print(data)
 
     @property
     def text(self) -> str:
@@ -80,10 +75,19 @@ class OneUIComboButton(MDGridLayout):
             self.combo_field.text = val
 
     def release(self):
-        self.__menu.open(self)
+        if self.__menu:
+            self.__menu.open(self)
 
-    def on_items(self, instance, val):
-        self.__menu.items = val
+    def on_items(self, _, val):
+        if not self.__menu:
+            self.__menu = OneUICombo()
+            self.__menu.size_hint_max_y = None
+            self.__menu.max_height = 300
+            self.__menu.on_select = lambda x: self.selected(x)
+            self.__menu.items = val
+
+    def on_release(self):
+        self.release()
 
     def search(self, val):
         print(val)

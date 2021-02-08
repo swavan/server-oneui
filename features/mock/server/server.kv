@@ -1,0 +1,104 @@
+#:import OneUITabPanel widgets.tab.OneUITabPanel
+#:import OneUITabbedPanelItem widgets.tab.OneUITabbedPanelItem
+
+<OneUIMockServerBoard>
+    id: mock_server_board
+    size_hint: 1, None
+    height: "500dp"
+    OneUIGrid:
+        rows: 3
+        OneUIMockModify:
+            edit:mock_server_list.editable
+            selected: root.current
+            on_close: root.dismiss()
+            on_saved: mock_server_list.reload()
+        ScrollView:
+            OneUIMockServers
+                id: mock_server_list
+                on_selected: root.current = mock_server_list.selected
+
+<OneUIMockServers>
+    cols: 1
+    padding: 10, 10, 10, 10
+    adaptive_height: True
+
+
+<OneUIMockServerList>
+    IconLeftWidget:
+        id: mock_server_status_button
+        on_release: root.open_menu()
+        icon: "play"
+
+    IconRightWidget:
+        id: mock_server_option_button
+        icon: "dots-vertical"
+        #on_release: root.update()
+        on_release: root.menu.open()
+        size_hint: None, 1
+        width: dp(25)
+
+
+<OneUIMockModify>
+    adaptive_height: True
+    OneUIBox:
+        size_hint_y: None
+        height: "52dp"
+        md_bg_color: OneUIColors.Background.value
+        orientation: "horizontal"
+        spacing: 1
+        padding: 1, 1, 1, 1
+        OneUITextField:
+            id: mock_env_name
+            hint_text: "Environment"
+            size_hint: 1, None
+            height: "50dp"
+            background_color: OneUIColors.Background.value
+            foreground_color: 1, 1, 1, 1
+            hint_text_color: 1, 1, 1, .4
+            cursor_color: 1, 1, 1, 1
+            write_tab: False
+
+        NumberInputField:
+            id: mock_env_port
+            hint_text: "Port"
+            width: "75dp"
+            start: 1
+            halign: "center"
+            end: 65535
+            size_hint: None, None
+            height: "50dp"
+            background_color: OneUIColors.Background.value
+            foreground_color: 1, 1, 1, 1
+            hint_text_color: 1, 1, 1, .4
+            cursor_color: 1, 1, 1, 1
+            write_tab: False
+
+        NumberInputField:
+            id: mock_response_delay
+            hint_text: "Delay"
+            size_hint_x: None
+            width: "70dp"
+            start: 0
+            halign: "center"
+            end: 60
+            size_hint: None, None
+            height: "50dp"
+            background_color: OneUIColors.Background.value
+            foreground_color: 1, 1, 1, 1
+            hint_text_color: 1, 1, 1, .4
+            cursor_color: 1, 1, 1, 1
+            write_tab: False
+
+        MDIconButton:
+            id: mock_server_save_button
+            icon: "plus"
+            theme_text_color: "Custom"
+            text_color: OneUIColors.SaveButton.value
+            on_release: root.record()
+
+        MDIconButton:
+            id: mock_server_close_button
+            icon: "close-box"
+            theme_text_color: "Custom"
+            text_color: OneUIColors.AccentColor.value
+            on_release: root.dismiss()

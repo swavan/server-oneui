@@ -1,0 +1,19 @@
+<OneUITextField>:
+    font_name: "Roboto"
+    foreground_color: [ 0, 0, 0, 1 ]
+    background_color: [ 0, 0, 0, 0 ]
+
+<OneUITextFieldWrapper>:
+    adaptive_height: True
+    orientation: "horizontal"
+    canvas.before:
+        Color:
+            rgba:  root.background_color
+        RoundedRectangle:
+            pos: self.x, self.y
+            size: self.width, self.height
+            radius: root.border_radius
+
+<OneUITextFieldRectangle@OneUITextField>
+    foreground_color: [ 0, 0, 0, 1 ]
+    background_color: [ 1, 1, 1, 1 ]

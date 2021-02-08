@@ -1,0 +1,49 @@
+<OneUIMockView>:
+    view_endpoint_identifier_list: view_endpoint_identifier_list
+    OneUIBox:
+        OneUIBox:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: "65dp"
+            padding: [ dp(10), dp(10), dp(0), dp(10) ]
+            adaptive_height: True
+            OneUITextField:
+                id: endpoint_identifier_name
+                padding: dp(15), dp(10)
+                hint_text: "Search - [ Hit Enter to find data ]"
+                size_hint: 1, None
+                height: "40dp"
+                background_color: 0, 0, 0, .3
+                foreground_color: 1, 1, 1, 1
+                hint_text_color: 1, 1, 1, .4
+                cursor_color: 1, 1, 1, 1
+                on_text: root.search
+                on_text_validate: mock_view.search(None, self.text)
+            MDIconButton:
+                icon: "filter-variant"
+                theme_text_color: "Custom"
+                text_color: OneUIColors.AccentColor.value
+        ScrollView:
+            MDList:
+                adaptive_height: True
+                id: view_endpoint_identifier_list
+
+<OneUIMockListItem>:
+    text_color: [1, 1, 1, 1]
+    secondary_text_color: [1, 1, 1, 1]
+    theme_text_color: "Custom"
+    on_press: root.release_edit()
+    font_style: "Subtitle1"
+    font:"Roboto"
+
+    IconLeftWidget:
+        icon: "database"
+        theme_text_color: "Custom"
+        text_color: OneUIColors.AccentColor.value
+
+    IconRightWidget:
+        id: mock_endpoint_identified_item
+        icon: "dots-vertical"
+        on_release: root.menu.open()
+        theme_text_color: "Custom"
+        text_color: OneUIColors.AccentColor.value

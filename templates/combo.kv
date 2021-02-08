@@ -2,35 +2,30 @@
 
 <OneUIComboItem>:
     orientation: "vertical"
-    padding: [dp(0), dp(0.5)]
-    md_bg_color: rgba("#FFFFFF")
-    OneUIBox:
-        padding: [dp(10), dp(0)]
-        md_bg_color: rgba("#2C363F")
-        MDLabel:
-            text: root.text
-            halign: "left"
-            color: 1, 1 ,1 , 1
+    md_bg_color: rgba("#2C363F")
+    padding: [dp(10), dp(2), dp(2), dp(2)]
+    MDLabel:
+        hint_text_y: None
+        height: dp(25)
+        text: root.text
+        font_size: "13sp"
+        halign: "left"
+        color: 1, 1 ,1 , 1
 
 <OneUIComboButton>:
     cols: 2
-    md_bg_color: [ 1, 1, 1, 1 ]
+    row: 1
     combo_field: combo_field
-    size_hint: 1, None
-    height: "50dp"
+    adaptive_height: True
     OneUITextField:
         id: combo_field
-        border_color: [1, 1, 1, 1]
         hint_text: root.placeholder
-        size_hint_y: None
-        height: root.height
+        foreground_color: 0, 0, 0, 1
+        background_color: 0, 0, 0, 0
         on_focus: if self.focus: root.release()
-        on_text: lambda x: search(x)
-    MDIconButton:
-        id: combo_button
-        theme_text_color: "Custom"
-        text_color: 0, 0, 0, 0.5
-        icon: "assets/images/text/up-down-arrows.png"
-        on_release: root.release()
-        size_hint_y: None
-        height: root.height
+    MDIcon:
+        icon: "menu-swap"
+        size_hint_x: None
+        width: "40dp"
+
+

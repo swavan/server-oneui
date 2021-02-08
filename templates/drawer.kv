@@ -1,0 +1,9 @@
+<OneUIVerticalBar>:
+    back_color: app.theme_cls.primary_color
+    canvas.before:
+        Color:
+            rgba: self.back_color
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: self.border_radius

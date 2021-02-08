@@ -1,0 +1,41 @@
+#:import OneUIBrowserRule features.browser_rule.add.OneUIBrowserRule
+#:import OneUIBrowserRules features.browser_rule.view.OneUIBrowserRules
+#:import OneUIBrowserRuleSearch features.browser_rule.search.OneUIBrowserRuleSearch
+
+<OneUIBrowserRulePage>:
+    name: "browser_rule"
+    on_enter:
+        browser_rule_drawer.set_state("open")
+    OneUIGrid:
+        cols: 1
+        row: 3
+        MDToolbar:
+            title: "Browser Rule"
+        MDNavigationLayout:
+            ScreenManager:
+                Screen:
+                    name: "add-browser-rule"
+                    OneUIBrowserRule:
+                        id: browser_rule_creator
+
+            MDNavigationDrawer:
+                id: browser_rule_drawer
+                type: "standard"
+                anchor: "left"
+                elevation: 0
+                orientation: "vertical"
+                md_bg_color: OneUIColors.Background.value
+                OneUIBrowserRuleSearch:
+                OneUIBrowserRules:
+                OneUIBox:
+                    padding: [ dp(20), dp(20), dp(20), dp(20)]
+                    OneUIButton:
+                        size_hint: 1, None
+                        height: dp(40)
+                        text: "Add More Rule"
+                        border_radius: [5, 35, 0 ,35]
+                        back_color: OneUIColors.AccentColor.value
+#                        on_release: browser_rule_creator.create_form()
+
+
+

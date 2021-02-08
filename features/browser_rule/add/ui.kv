@@ -1,0 +1,214 @@
+#:import FILTER_BY_OPTIONS configs.codes.FILTER_BY_OPTIONS
+#:import HTTP_METHODS configs.codes.HTTP_METHODS
+
+#:import ACTIONS configs.codes.ACTIONS
+#:import RULES_FOR configs.codes.RULES_FOR
+#:import OPERATORS configs.codes.OPERATORS
+
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+
+<OneUIBrowserRule>:
+    ScrollView:
+        do_scroll_x: False
+        do_scroll_y: True
+        OneUIBox:
+            adaptive_height: True
+            padding: "10dp"
+            spacing: "10dp"
+            orientation: "vertical"
+
+            OneUITextFieldWrapper:
+                OneUITextField:
+                    id: name
+                    hint_text: "Rule Name"
+                    foreground_color: 0, 0, 0, 1
+                    background_color: 0, 0, 0, 0
+
+            OneUITextFieldWrapper:
+                OneUITextArea:
+                    id: description
+                    hint_text: "Description"
+
+            OneUIComboDropdown:
+                id: rule_for
+                text: 'Url'
+                items: RULES_FOR.keys()
+
+            OneUIComboDropdown:
+                id: rule_operator
+                text: 'Contains'
+                items: OPERATORS.keys()
+
+            OneUITextFieldWrapper:
+                OneUITextField:
+                    id: rule_keyword
+                    hint_text: "http://www.example.com"
+
+            MDList:
+                id: rule_logics
+                spacing: 20
+                adaptive_height: True
+
+            OneUIStrokeButton:
+                size_hint: None, None
+                width: dp(120)
+                height: dp(40)
+                text: "Add Response"
+                border_radius: 0
+                on_release: root.add_response_logics()
+                back_color: OneUIColors.AccentColor.value
+
+            OneUIGrid:
+                spacing: 15
+                cols: 2
+                adaptive_height: True
+
+                OneUIButton:
+                    size_hint: None, None
+                    text: "Save"
+                    height: dp(40)
+                    width: dp(120)
+                    back_color: OneUIColors.SaveButton.value
+                    on_release: root.save()
+
+<OneUIRuleLogicWidget>:
+    adaptive_height: True
+    OneUIComboDropdown:
+        id: rule_selected_action
+        text: 'Redirect'
+        items: ACTIONS.keys()
+
+    OneUITextFieldWrapper:
+        OneUITextField:
+            id: rule_link
+            hint_text: "Link"
+
+    OneUIBrowserRuleData:
+
+    OneUIComboDropdown:
+        id: rule_http_method
+        text: 'ALL'
+        helper_text: 'Http Method'
+        items: HTTP_METHODS.keys()
+
+    OneUIStrokeButton:
+        text: "+ Add Filter"
+        size_hint: None, None
+        width: dp(100)
+        height: dp(40)
+        on_press: root.add_filter()
+        border_radius: 0
+        back_color: OneUIColors.AccentColor.value
+
+    MDList:
+        id: rule_filters
+        spacing: 10
+        adaptive_height: True
+        padding: dp(10)
+        md_bg_color: [1, 1, 1, .2]
+
+    OneUITextFieldWrapper:
+        OneUITextField:
+            id: rule_logic_name
+            hint_text: "Give a name to response logic"
+
+<OneUIRuleLogicFilterWidget>:
+    cols: 4
+    spacing: 1
+    adaptive_height: True
+    OneUITextFieldWrapper:
+        OneUIComboDropdown:
+            id: rule_http_method
+            text: 'Query'
+            items: FILTER_BY_OPTIONS.keys()
+
+        OneUITextField:
+            id: rule_keyword
+            hint_text: "Key"
+
+        OneUITextField:
+            id: rule_keyword
+            hint_text: "Value"
+
+        OneUIIconButton:
+            size_hint_x: None
+            width: dp(25)
+            icon: "close"
+            theme_text_color: "Custom"
+            text_color: OneUIColors.AccentColor.value
+            on_release: root.on_release()
+
+# Response section header buttons
+<OneUIBrowserResponseHeaderPanel>:
+    adaptive_height: True
+    padding: [ 1, 1, 1, 1 ]
+    OneUILeftSide:
+        OneUIHorizontalList:
+            md_bg_color: [0, 0, 0, 0]
+            cols: 3
+            rows: 1
+            spacing: 5
+            border_radius:[ 0 ]
+            adaptive_height: True
+            MDIconButton:
+                icon: "plus-box"
+                on_release: root.toggle()
+                theme_text_color: "Custom"
+                text_color: [0, 1, 0, .8]
+
+            MDLabel:
+                id: browser_rule_response_header
+                text: "Response"
+                font_size: "15sp"
+                width: dp(100)
+                height: dp(55)
+                theme_text_color: "Custom"
+                text_color: [1, 1, 1, 1]
+
+    OneUIRightSide:
+        md_bg_color: [1, 1, 1, 1]
+        MDIconButton:
+            icon: "trash-can"
+            theme_text_color: "Custom"
+            on_release: root.remove()
+            text_color: OneUIColors.AccentColor.value
+
+<OneUIBrowserRuleData>
+    OneUITextFieldWrapper:
+        OneUITextArea:
+            hint_text: "Data"
+
+    MDList:
+        id: browser_rule_mock_headers
+    MDRectangleFlatIconButton:
+        icon: "plus-box"
+        text: "Add Response headers"
+
+
+    OneUITextFieldWrapper:
+        NumberInputField:
+            id: browser_rule_mock_status_code
+            hint_text: "Status Codes"
+            start: 1
+            end: 503
+
+    OneUITextFieldWrapper:
+        OneUITextField:
+            id: browser_rule_mock_content_type
+
+
+
+<OneUIBrowserRuleDataHeader>:
+    adaptive_height: True
+    OneUITextFieldWrapper:
+        OneUITextField:
+            id: browser_rule_mock_header_key
+        OneUITextField:
+            id: browser_rule_mock_header_value
+        OneUIIconButton:
+            size_hint_x: None
+            width: dp(25)
+            icon: "close"
+            theme_text_color: "Custom"
+            text_color: OneUIColors.AccentColor.value
+            on_release: root.remove()

@@ -34,7 +34,6 @@ class OneUIHeaders(MDGridLayout):
 
     def add(self):
         __header = OneUIHeader()
-        print("Add header")
         self.__headers.add_widget(__header)
 
     def delete_header(self, widget):

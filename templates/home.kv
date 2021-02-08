@@ -1,19 +1,21 @@
 #:import MDNavigationLayout kivymd.uix.navigationdrawer.MDNavigationLayout
 #:import MDNavigationDrawer kivymd.uix.navigationdrawer.MDNavigationDrawer
 
-#:import NoTransition kivy.uix.screenmanager.NoTransition
+#:import OneUIVerticalBar widgets.drawer.OneUIVerticalBar
 
 #:import OneUIMockPage features.mock.page.OneUIMockPage
 #:import OneUIBrowserRulePage features.browser_rule.page.OneUIBrowserRulePage
 #:import OneUIHelpPage features.help.page.OneUIHelpPage
 #:import OneUIAboutPage features.about.page.OneUIAboutPage
 #:import OneUIHomePage features.home.page.OneUIHomePage
+
 <OneUIHomePage>:
-    MDBoxLayout:
-        orientation: "vertical"
+    MDGridLayout:
+        cols: 1
+        rows: 2
         MDToolbar:
             title: "Home"
-            left_action_items: [["menu", lambda x: root.nav_drawer.set_state("toggle")]]
+            right_action_items: [["menu", lambda x: root.nav_drawer.set_state("toggle")]]
         MDLabel:
             halign: "center"
             text: "Home page content"
@@ -22,10 +24,34 @@
 <OneUIPageManager>:
     menuItems: menuItems
     main_screen_manager: main_screen_manager
-    MDNavigationLayout:
+    OneUIGrid:
+        cols: 2
+        OneUIVerticalBar:
+            id: nav_drawer
+            OneUIGrid:
+                rows: 3
+                OneUIBox:
+                    size_hint: 1, None
+                    height: dp(70)
+                    padding: "6dp"
+                    Image:
+                        source: 'assets/images/logo/big.png'
+                ScrollView:
+                    MDList:
+                        id: menuItems
+                OneUIBox:
+                    padding: [ dp(15), dp(10), dp(15), dp(10) ]
+                    MDIconButton:
+                        icon: "cog"
+                        theme_text_color: "Custom"
+                        text_color: [ 1, 1, 1, .8]
+                    MDIconButton:
+                        icon: "location-exit"
+                        theme_text_color: "Custom"
+                        text_color: [1, 0, 0, .9]
         ScreenManager:
             id: main_screen_manager
-            transition: NoTransition()
+#            transition: SlideTransition()
 
             OneUIHomePage:
                 name: "home"
@@ -44,15 +70,3 @@
             OneUIAboutPage:
                 name: "about"
 
-        MDNavigationDrawer:
-            type: "standard"
-            id: nav_drawer
-            state: "open"
-            elevation: 0
-            size_hint_x: None
-
-            MDBoxLayout:
-                orientation: "vertical"
-                ScrollView:
-                    MDList:
-                        id: menuItems

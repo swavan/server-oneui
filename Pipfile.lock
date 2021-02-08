@@ -95,7 +95,9 @@
         "kivymd": {
             "file": "https://github.com/kivymd/KivyMD/archive/master.zip",
             "hashes": [
-                "sha256:42029b2606852e61848149664b0c51aa56d9e0ec336719d9f9fc08856d0245e4"
+                "sha256:fb99036e584d684469df1092c4dcf58145bbc560ab19c1c6dafbbb0d058f81d4",
+                "sha256:42029b2606852e61848149664b0c51aa56d9e0ec336719d9f9fc08856d0245e4",
+                "sha256:726c7fd521aa04058b5365cd3b982eff4efcaa21dd1796c35ad480decb33ad00"
             ],
             "version": "==0.104.2.dev0"
         },
