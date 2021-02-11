@@ -100,39 +100,38 @@ CONTENT_TYPES = [
 ]
 
 RULES_FOR = {
-    "Server": "s",
-    "Url": "u",
-    "Path": "p"
+    "s": "Server",
+    "u": "Url",
+    "p": "Path"
 }
 
 OPERATORS = {
-    "Equals": "e",
-    "Contains": "c",
-    "Wildcard": "w",
-    "Prefix": "p",
-    "Suffix": "s"
+    "e": "Equals",
+    "c": "Contains",
+    "w": "Wildcard",
+    "p": "Prefix",
+    "s": "Suffix"
 }
 
 ACTIONS = {
-    "Redirect": "r",
-    "Mock Data": "d",
-    "Block": "b"
+    "r": "Redirect",
+    "d": "Mock Data",
+    "b": "Block"
 }
 
 HTTP_METHODS = {
-    "ALL": "al",
-    "GET": "ge",
-    "POST": "po",
-    "PUT": "pu",
-    "DELETE": "de",
-    "PATCH": "pa"
+    "al": "ALL",
+    "ge": "GET",
+    "po": "POST",
+    "pu": "PUT",
+    "de": "DELETE",
+    "pa": "PATCH"
 }
 
 FILTER_BY_OPTIONS = {
-    "Query": "q",
-    "Body": "b",
-    "Header": "h",
-    "Route Params": "q"
+    "q": "Query",
+    "b": "Body",
+    "h": "Header",
 }
 
 RESOURCE_TYPES = [
@@ -147,4 +146,3 @@ RESOURCE_TYPES = [
     "xmlhttprequest",
     "other"
 ]
-

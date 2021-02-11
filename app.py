@@ -46,7 +46,7 @@ if __name__ == '__main__':
     Config.set('graphics', 'borderless', False)
     Config.set('graphics', 'width', '1000')
     Config.set('graphics', 'height', '800')
-    Config.set('graphics', 'minimum_width', '800')
+    Config.set('graphics', 'minimum_width', '860')
     Config.set('graphics', 'minimum_height', '600')
     Config.write()
     trio.run(async_runTouchApp, SwaVanServerApp().run(), "trio")

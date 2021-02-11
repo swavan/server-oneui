@@ -72,7 +72,7 @@ class NumberInputField(OneUITextField):
 
 class OneUITextFieldWrapper(OneUIBox):
     border_color = ListProperty([1, 1, 1, 1])
-    border_radius = ListProperty([10, 10, 10, 10])
+    border_radius = ListProperty([0, 0, 0, 0])
     background_color = ListProperty([1, 1, 1, 1])
 
     def __init__(self, **kwargs):

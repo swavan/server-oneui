@@ -88,45 +88,45 @@
 # Mock response rules
 <OneUIMockRule>:
     cols: 5
-    size_hint: 1, None
-    height: "50dp"
+    size_hint_y: None
+    height: "40dp"
     spacing: dp(1)
-    OneUIComboDropdown:
-        id: mock_filter_by
-        size_hint: None, None
-        width: dp(200)
-        height: "50dp"
-        placeholder: "Filter By"
-        items: FILTER_BY_OPTIONS.keys()
-
     OneUITextFieldWrapper:
+        spacing: 2
+        OneUIComboDropdown:
+            id: mock_filter_by
+            placeholder: "Filter By"
+            dict_items: FILTER_BY_OPTIONS
+            size_hint_x: None
+            width: dp(130)
+
+        OneUIDivider:
+
         OneUITextField:
             id: mock_filter_key
             hint_text: "Key"
 
-    OneUIComboDropdown:
-        id: mock_filter_operator
-        items: OPERATORS.keys()
-        placeholder: "Condition"
-        size_hint: None, 1
-        width: dp(150)
+        OneUIDivider:
 
-    OneUITextFieldWrapper:
+        OneUIComboDropdown:
+            id: mock_filter_operator
+            dict_items: OPERATORS
+            placeholder: "Condition"
+            size_hint_x: None
+            width: dp(130)
+
+        OneUIDivider:
+
         OneUITextField:
             id: mock_filter_value
             hint_text: "Value"
-
-
-    OneUIBox:
-        size_hint: None, None
-        height: "50dp"
-        width: dp(50)
-        md_bg_color: app.theme_cls.primary_color
-        MDIconButton:
+        OneUIIconButton:
+            size_hint_x: None
+            width: dp(35)
             theme_text_color: "Custom"
             on_release: root.on_delete()
             icon: "trash-can"
-            text_color: [1, 1, 1, .8]
+            text_color: OneUIColors.AccentColor.value
 
 
 
@@ -169,7 +169,7 @@
             placeholder: 'Http Method'
             size_hint_x: None
             width: "150dp"
-            items: HTTP_METHODS.keys()
+            dict_items: HTTP_METHODS
 
         OneUITextFieldWrapper:
             OneUITextField:

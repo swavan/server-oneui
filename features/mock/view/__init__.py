@@ -69,7 +69,6 @@ class OneUIMockView(MDScreen):
         self.load()
 
 
-
 class OneUIMockListItem(OneLineAvatarIconListItem):
     mock = ObjectProperty()
     edit = ObjectProperty(force_dispatch=True)

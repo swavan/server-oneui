@@ -42,7 +42,6 @@ class OneUIExpandablePanel(MDGridLayout):
         elif self.bodies:
             try:
                 self.remove()
-                # self.height = self.head.height + self.bodies[position].height
                 super().add_widget(self.bodies[position])
                 self.__current = position
                 self._panelState = "open"

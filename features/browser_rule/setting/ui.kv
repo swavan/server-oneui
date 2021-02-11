@@ -1,0 +1,89 @@
+#:import OneUILeftSwitch widgets.select_controls.OneUILeftSwitch
+#:import RESOURCE_TYPES configs.codes.RESOURCE_TYPES
+<OneUIBrowserRuleSetting>:
+    padding: 10
+    OneUIBrowserRuleReloadOnAction:
+    ScrollView:
+        OneUIBrowserRuleResourceTypes:
+            resources: RESOURCE_TYPES
+    OneUIBrowserRuleChangeMockServer:
+
+<OneUIBrowserRuleReloadOnAction>:
+    text: "Reload on action"
+    OneUILeftSwitch:
+        id: left_switch
+
+<OneUIBrowserResourceType>:
+    text: root.text
+    OneUILeftCheckbox:
+        id: left_checkbox
+
+<OneUIBrowserRuleResourceTypes>:
+    md_bg_color: [0, 0, 0, .1]
+    adaptive_height: True
+    OneUIBox:
+        adaptive_height: True
+        padding: 10, 20, 10, 20
+        md_bg_color: app.theme_cls.primary_color
+        orientation: "horizontal"
+        MDLabel:
+            text: "Filter resource type"
+            font_size: "17sp"
+            theme_text_color: "Custom"
+            text_color: OneUIColors.AccentColor.value
+        OneUITooltipIconButton:
+            size_hint_x: None
+            width: dp(30)
+            icon: "information"
+            theme_text_color: "Custom"
+            text_color: OneUIColors.AccentColor.value
+            tooltip_text: "Click here to know about resource type"
+            on_release: root.open_page()
+    MDList:
+        adaptive_height: True
+        id: browser_rile_filter_resource_type
+
+
+<OneUIBrowserRuleChangeMockServer>:
+    size_hint_y: None
+    height: 80
+    OneUIBox:
+        OneUITextFieldWrapper:
+            padding: dp(5)
+            md_bg_color: OneUIColors.Background.value
+            OneUIBox:
+                md_bg_color: app.theme_cls.primary_color
+                size_hint_x: None
+                width: 130
+                MDLabel:
+                    text: "Mock Server"
+                    theme_text_color: "Custom"
+                    text_color: OneUIColors.AccentColor.value
+                    halign: "center"
+            OneUITextField:
+                id: browser_rule_new_mock_server
+                foreground_color: 1, 1, 1, 1
+                hint_text_color: 1, 1, 1, .4
+                cursor_color: 1, 1, 1, 1
+                hint_text: "Mock server url"
+            OneUIBox:
+                size_hint: None, None
+                width: 100
+                height: dp(40)
+                OneUIButton:
+                    back_color: OneUIColors.AccentColor.value
+                    text: "Test"
+                    width: 100
+                    height: dp(40)
+                    border_radius: [0]
+
+            OneUIBox:
+                size_hint: None, None
+                width: 100
+                height: dp(40)
+                OneUIButton:
+                    width: 100
+                    border_radius: [0]
+                    height: dp(40)
+                    back_color: OneUIColors.SaveButton.value
+                    text: "Save"

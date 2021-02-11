@@ -1,4 +1,5 @@
-from typing import List
+from dataclasses import field
+from typing import List, Dict
 
 from kivy.metrics import dp
 from kivy.uix.dropdown import DropDown
@@ -55,8 +56,11 @@ class OneUIComboButton(OneUITextFieldWrapper, ButtonBehavior):
     placeholder = StringProperty()
     combo_field = ObjectProperty()
     combo_button = ObjectProperty()
+    text = StringProperty()
     __menu = None
-    items = ListProperty()
+    items = ListProperty([])
+    dict_items = ObjectProperty({})
+    key = StringProperty()
 
     def __init__(self, **kwargs):
         super(OneUIComboButton, self).__init__(**kwargs)
@@ -65,32 +69,37 @@ class OneUIComboButton(OneUITextFieldWrapper, ButtonBehavior):
     def selected(self, data):
         self.combo_field.text = data
 
-    @property
-    def text(self) -> str:
-        return self.combo_field.text if self.combo_field else ""
+    def set_text(self):
+        revered = {v: k for k, v in self.dict_items.items()}
+        self.text = revered.get(self.combo_field.text, self.combo_field.text)
 
-    @text.setter
-    def text(self, val) -> None:
-        if self.combo_field:
-            self.combo_field.text = val
+    def on_text(self, _, data):
+        if len(self.dict_items.items()) > 0 or len(self.items) > 0:
+            self.combo_field.text = self.dict_items.get(data, data)
+        else:
+            raise ValueError("Always set the items or dict_items first then only set text")
 
     def release(self):
         if self.__menu:
             self.__menu.open(self)
 
-    def on_items(self, _, val):
+    def on_items(self, _, items: List):
+        self.create_menu(items)
+
+    def on_dict_items(self, _, items: Dict):
+        rows = [row for row in items.values()]
+        self.create_menu(rows)
+
+    def create_menu(self, items: List):
         if not self.__menu:
             self.__menu = OneUICombo()
             self.__menu.size_hint_max_y = None
             self.__menu.max_height = 300
             self.__menu.on_select = lambda x: self.selected(x)
-            self.__menu.items = val
+            self.__menu.items = items
 
     def on_release(self):
         self.release()
-
-    def search(self, val):
-        print(val)
 
 
 class OneUIComboDropdown(OneUIComboButton):

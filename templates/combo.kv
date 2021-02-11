@@ -23,6 +23,7 @@
         foreground_color: 0, 0, 0, 1
         background_color: 0, 0, 0, 0
         on_focus: if self.focus: root.release()
+        on_text: root.set_text()
     MDIcon:
         icon: "menu-swap"
         size_hint_x: None

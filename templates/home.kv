@@ -15,12 +15,45 @@
         rows: 2
         MDToolbar:
             title: "Home"
-            right_action_items: [["menu", lambda x: root.nav_drawer.set_state("toggle")]]
         MDLabel:
             halign: "center"
             text: "Home page content"
+        OneUIGrid:
+            cols: 3
+            padding: 10, 10, 10, 10
+            spacing: 10
+            MDCard:
+                focus_behavior: True
+                ripple_behavior: True
+                orientation: "vertical"
+                MDBoxLayout:
+                    adaptive_height: True
 
 
+            MDCard:
+                focus_behavior: True
+                ripple_behavior: True
+                orientation: "vertical"
+
+            MDCard:
+                focus_behavior: True
+                ripple_behavior: True
+                orientation: "vertical"
+
+            MDCard:
+                focus_behavior: True
+                ripple_behavior: True
+                orientation: "vertical"
+
+            MDCard:
+                focus_behavior: True
+                ripple_behavior: True
+                orientation: "vertical"
+
+            MDCard:
+                focus_behavior: True
+                ripple_behavior: True
+                orientation: "vertical"
 <OneUIPageManager>:
     menuItems: menuItems
     main_screen_manager: main_screen_manager
@@ -51,7 +84,6 @@
                         text_color: [1, 0, 0, .9]
         ScreenManager:
             id: main_screen_manager
-#            transition: SlideTransition()
 
             OneUIHomePage:
                 name: "home"

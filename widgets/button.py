@@ -41,5 +41,5 @@ class OneUITooltipIconButton(MDIconButton, MDTooltip):
     pass
 
 
-class OneUIIconButton(ButtonBehavior, MDIcon):
+class OneUIIconButton(ButtonBehavior, MDIcon, MDTooltip):
     pass

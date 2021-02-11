@@ -1,0 +1,26 @@
+<OneUIBrowserRules>:
+    ScrollView:
+        MDList:
+            adaptive_height: True
+            id: browser_rules_view
+
+
+<OneUIBrowserRulesListItem>:
+    text_color: [1, 1, 1, 1]
+    secondary_text_color: [1, 1, 1, 1]
+    theme_text_color: "Custom"
+    on_press: root.release_edit()
+    font_style: "Subtitle1"
+    font:"Roboto"
+
+    IconLeftWidget:
+        icon: "database"
+        theme_text_color: "Custom"
+        text_color: OneUIColors.AccentColor.value
+
+    IconRightWidget:
+        id: rule_item
+        icon: "dots-vertical"
+        on_release: root.menu.open()
+        theme_text_color: "Custom"
+        text_color: OneUIColors.AccentColor.value

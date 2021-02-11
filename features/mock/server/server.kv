@@ -40,18 +40,13 @@
 
 <OneUIMockModify>
     adaptive_height: True
-    OneUIBox:
-        size_hint_y: None
-        height: "52dp"
+    padding: 10, 10, 10, 10
+    OneUITextFieldWrapper:
         md_bg_color: OneUIColors.Background.value
-        orientation: "horizontal"
-        spacing: 1
-        padding: 1, 1, 1, 1
+        height: dp(55)
         OneUITextField:
             id: mock_env_name
             hint_text: "Environment"
-            size_hint: 1, None
-            height: "50dp"
             background_color: OneUIColors.Background.value
             foreground_color: 1, 1, 1, 1
             hint_text_color: 1, 1, 1, .4
@@ -61,12 +56,11 @@
         NumberInputField:
             id: mock_env_port
             hint_text: "Port"
+            size_hint_x: None
             width: "75dp"
             start: 1
             halign: "center"
             end: 65535
-            size_hint: None, None
-            height: "50dp"
             background_color: OneUIColors.Background.value
             foreground_color: 1, 1, 1, 1
             hint_text_color: 1, 1, 1, .4
@@ -81,23 +75,25 @@
             start: 0
             halign: "center"
             end: 60
-            size_hint: None, None
-            height: "50dp"
             background_color: OneUIColors.Background.value
             foreground_color: 1, 1, 1, 1
             hint_text_color: 1, 1, 1, .4
             cursor_color: 1, 1, 1, 1
             write_tab: False
 
-        MDIconButton:
+        OneUIIconButton:
             id: mock_server_save_button
+            size_hint_x: None
+            width: "45dp"
             icon: "plus"
             theme_text_color: "Custom"
             text_color: OneUIColors.SaveButton.value
             on_release: root.record()
 
-        MDIconButton:
+        OneUIIconButton:
             id: mock_server_close_button
+            size_hint_x: None
+            width: "35dp"
             icon: "close-box"
             theme_text_color: "Custom"
             text_color: OneUIColors.AccentColor.value

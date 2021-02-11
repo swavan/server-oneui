@@ -2,18 +2,15 @@ from dataclasses import field
 from typing import List
 
 from kivy.lang import Builder
-from kivy.metrics import dp
 from kivy.properties import ObjectProperty, BooleanProperty, ListProperty
 from kivymd.toast import toast
-from kivymd.uix.bottomsheet import MDListBottomSheet, MDCustomBottomSheet
 from kivymd.uix.boxlayout import MDBoxLayout
-from kivymd.uix.dialog import MDDialog
+
 from kivymd.uix.gridlayout import MDGridLayout
 from kivymd.uix.screen import MDScreen
 
-from configs.color import OneUIColors
+
 from features.mock import data
-from features.mock.server import OneUIMockServerBoard
 
 from widgets.layout import OneUIGrid, OneUIBox
 from widgets.panel import OneUIExpandablePanel
