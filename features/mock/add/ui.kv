@@ -169,7 +169,7 @@
             placeholder: 'Http Method'
             size_hint_x: None
             width: "150dp"
-            dict_items: HTTP_METHODS
+            items:[method for method in HTTP_METHODS.values() if method != "ALL"]
 
         OneUITextFieldWrapper:
             OneUITextField:
@@ -182,7 +182,7 @@
             NumberInputField:
                 id: mock_status_code
                 hint_text: "Status Codes"
-                start: 100
+                start: 0
                 end: 503
 
         OneUITextFieldWrapper:
@@ -192,6 +192,8 @@
                 id: mock_response_delay
                 hint_text: "Delay"
                 halign: "center"
+                start: 0
+                end: 503
 
     OneUIBox:
         adaptive_height: True
@@ -208,6 +210,7 @@
                 multiline: True
                 size_hint_y: None
                 height: "300dp"
+
 # Response section header buttons
 <OneUIMockHeaderPanel>:
     adaptive_height: True

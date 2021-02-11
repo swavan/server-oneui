@@ -10,29 +10,22 @@ from kivymd.uix.list import OneLineAvatarIconListItem
 from kivymd.uix.menu import MDDropdownMenu
 from kivymd.uix.screen import MDScreen
 
-from features.mock import data
-
-from features.mock.controller import load_endpoint_identifiers, remove_endpoint_identifier
-from widgets.layout import OneUIBox
-
 Builder.load_file("features/mock/view/ui.kv")
 
 
 class OneUIMockView(MDScreen):
-    guardian_id = 0
     selected_row = ObjectProperty()
-    rows = ListProperty()
+    delete = ObjectProperty()
+    rows = ListProperty(force_dispatch=True)
     guardian = ObjectProperty()
     view_endpoint_identifier_list = ObjectProperty()
 
     def __init__(self, **kwargs):
         super(OneUIMockView, self).__init__(**kwargs)
 
-    def load(self):
-        self.rows = self.mock_endpoints
-
     def update(self, rows):
         self.view_endpoint_identifier_list.clear_widgets()
+        print(rows)
         for row in rows:
             item = OneUIMockListItem()
             item.mock = row
@@ -42,18 +35,11 @@ class OneUIMockView(MDScreen):
             self.view_endpoint_identifier_list.add_widget(item)
 
     def on_rows(self, _, val):
+        print("on_rows")
         self.update(val)
 
-    @property
-    def mock_endpoints(self) -> List[data.EndpointIdentifier]:
-        return load_endpoint_identifiers(self.guardian_id)
-
     def on_delete(self, _, val):
-        status = remove_endpoint_identifier(val.id)
-        if status:
-            views = [view for view in self.views.children if view.mock.id == val.id]
-            if len(views) > 0:
-                self.views.remove_widget(views[0])
+        self.delete=val
 
     def on_edit(self, _, val):
         self.selected_row = val
@@ -64,9 +50,6 @@ class OneUIMockView(MDScreen):
     def search(self, _,  search_text: str):
         print(search_text)
 
-    def on_guardian(self, _, mock: data.Mock = data.Mock()):
-        self.guardian_id = mock.id
-        self.load()
 
 
 class OneUIMockListItem(OneLineAvatarIconListItem):
@@ -79,7 +62,7 @@ class OneUIMockListItem(OneLineAvatarIconListItem):
     menu = None
 
     def __init__(self, **kwargs):
-        super(OneUIMockListItem, self).__init__(**kwargs)
+        super(OneUIMockListItem, self).__init__()
         self.menu = MDDropdownMenu(
             caller=self.ids.mock_endpoint_identified_item,
             items=self.menu_items,

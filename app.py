@@ -3,7 +3,6 @@ import os
 import trio as trio
 from kivy.config import Config
 from kivy.base import async_runTouchApp
-from kivy.core.window import Window
 from kivy.lang import Builder
 from kivymd.app import MDApp
 from kivymd.uix.screen import MDScreen
@@ -41,11 +40,11 @@ class SwaVanServerApp(MDApp):
 
 if __name__ == '__main__':
     Config.set('kivy', 'desktop', 1)
-    Config.set('graphics', 'window_state', 'restore')
+    Config.set('graphics', 'window_state', 'maximized')
     Config.set('kivy', 'window_icon', 'assets/images/logo/big.png')
     Config.set('graphics', 'borderless', False)
-    Config.set('graphics', 'width', '1000')
-    Config.set('graphics', 'height', '800')
+    # Config.set('graphics', 'width', '1000')
+    # Config.set('graphics', 'height', '800')
     Config.set('graphics', 'minimum_width', '860')
     Config.set('graphics', 'minimum_height', '600')
     Config.write()

@@ -7,7 +7,8 @@ from kivymd.uix.screen import MDScreen
 
 from configs.color import OneUIColors
 from features.mock import data
-from features.mock.controller import load_endpoint_identifiers, get_last_seen_mock, save_mock_server
+from features.mock.controller import load_endpoint_identifiers, get_last_seen_mock, save_mock_server, \
+    remove_endpoint_identifier
 from features.mock.server import OneUIMockServerBoard
 from storage.cache import OneUIApplicationCache
 
@@ -15,7 +16,7 @@ from storage.cache import OneUIApplicationCache
 class OneUIMockPage(MDScreen):
     mock_nav_drawer = ObjectProperty()
     selected_endpoint_identifier = ObjectProperty({})
-    items = ListProperty(load_endpoint_identifiers())
+    items = ListProperty()
     mock_server = ObjectProperty(force_dispatch=True)
 
     def __init__(self, **kwargs):
@@ -112,3 +113,27 @@ class OneUIMockPage(MDScreen):
         if status:
             self.selected_server(get_last_seen_mock())
         toast(msg)
+
+    def on_mock_server(self, _, row):
+        self.update()
+
+    def update(self):
+        print("Update")
+        self.ids.mock_creator.guardian = self.mock_server
+        self.items = load_endpoint_identifiers(self.mock_server.id)
+        self.ids.mock_view.guardian = self.mock_server
+
+    def on_items(self, _, val):
+        print("Items")
+        print(val)
+        self.ids.mock_view.rows = val
+
+    def remove(self, mock: data.Mock):
+        try:
+            status = remove_endpoint_identifier(mock.id)
+
+            if status:
+                toast(f"{mock.name} deleted")
+                self.update()
+        finally:
+            pass

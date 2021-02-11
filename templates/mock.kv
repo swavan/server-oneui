@@ -36,8 +36,7 @@
                 OneUIMockAdd:
                     id: mock_creator
                     name: "mock_add"
-                    guardian: mock_page.mock_server
-                    on_saved: mock_view.load()
+                    on_saved: root.update()
                     selected_row: mock_view.selected_row
 
             MDNavigationDrawer:
@@ -51,7 +50,8 @@
                 OneUIBox:
                     OneUIMockView:
                         id: mock_view
-                        rows: mock_page.items
+                        on_delete: root.remove(mock_view.delete)
+
 
                     OneUIBox:
                         padding: [ dp(20), dp(20), dp(20), dp(20)]

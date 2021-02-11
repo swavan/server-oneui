@@ -26,8 +26,7 @@
 <OneUIMockServerList>
     IconLeftWidget:
         id: mock_server_status_button
-        on_release: root.open_menu()
-        icon: "play"
+        icon: "server"
 
     IconRightWidget:
         id: mock_server_option_button
@@ -85,7 +84,7 @@
             id: mock_server_save_button
             size_hint_x: None
             width: "45dp"
-            icon: "plus"
+            icon: "server-plus"
             theme_text_color: "Custom"
             text_color: OneUIColors.SaveButton.value
             on_release: root.record()
